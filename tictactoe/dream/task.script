@@ -1,0 +1,2 @@
+lnbas test.bas ~test.bas
+bas2tap -a ~test.bas test.tap
