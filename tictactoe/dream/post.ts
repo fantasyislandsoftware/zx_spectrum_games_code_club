@@ -1,3 +1,3 @@
 import { run } from "dreamfactory";
 
-run("open -a fuse test.tap");
+//run("open -a fuse build/test.tap");

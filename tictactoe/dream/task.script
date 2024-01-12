@@ -1,2 +1,3 @@
-lnbas test.bas ~test.bas
-bas2tap -a ~test.bas test.tap
+lnbas src/test.bas src/~test.bas
+bas2tap -a src/~test.bas build/test.tap
+diag spectrum

@@ -1,0 +1,72 @@
+REM TOCK TAC TOE
+
+LABEL START
+INK 7: PAPER 6: BORDER 7: CLS: LET ply=1: LET win=0: DIM a(9,2): LET sq=0
+GO SUB DRAW_BOARD
+GO TO TEST_PRESS
+
+LABEL DRAW_BOARD
+PRINT AT 2,10; INK 1; "Tic Tac Toe"
+PLOT INK 5;100,40: DRAW INK 5;0,100
+PLOT INK 5;150,40: DRAW INK 5;0,100
+PLOT INK 5;65,70: DRAW INK 5;120,0
+PLOT INK 5;65,110: DRAW INK 5;120,0
+
+REM State 1=player 1, 2=Player 2
+INK 5: PLOT 50,170: DRAW -40,-40: PLOT 10,170: DRAW 40,-40
+CIRCLE INK 4;220,150,20
+PRINT; INK 0; PAPER 3;AT 14,0;"1 2 3";AT 15,0;"4 5 6";AT 16,0;"7 8 9"
+RETURN
+
+LABEL TEST_PRESS
+PRINT AT 18,1; INK 7; PAPER 6-ply; "PLAYER ";ply;" Choose Square 1 - 9"
+LABEL GET_KEY
+LET i$=INKEY$
+IF i$>="1" AND i$<="9" THEN LET square=VAL i$: GO SUB CHECK_SQUARES
+IF i$="" THEN GO TO GET_KEY
+
+REM ** Test for Winning Conditions **
+GO SUB WINNING_CONDITIONS_CHECK
+IF sq=9 THEN LET win=-1
+IF win>0 THEN PRINT AT 18,1;"PLAYER ";win;" has WON!": BEEP .4,3: BEEP 2,10: GO TO START
+IF win<0 THEN PRINT AT 18,1;"GAME DRAWN - RESTARTING": BEEP .4,3: BEEP 2,10: GO TO START
+GO TO TEST_PRESS
+
+LABEL CHECK_SQUARES
+IF a(square,1)=1 OR a(square,2)=1 THEN PRINT AT 18,1; INK 3;"Square Taken Already": BEEP .3,1: GO TO DRAW_MOVE
+LET a(square,ply)=1: LET ply=ply+1: LET sq=sq+1
+PRINT AT 18,1; INK 4;"Good move!": BEEP .4,12
+IF ply=3 THEN LET ply=1
+
+LABEL DRAW_MOVE
+GO SUB DRAW_MOVE
+PRINT AT 18,1;"                     "
+RETURN
+
+LABEL WINNING_CONDITIONS_CHECK
+FOR n=1 TO 2
+IF a(1,n)=1 AND a(2,n)=1 AND a(3,n)=1 THEN LET win=n
+IF a(1,n)=1 AND a(4,n)=1 AND a(7,n)=1 THEN LET win=n
+IF a(2,n)=1 AND a(5,n)=1 AND a(8,n)=1 THEN LET win=n
+IF a(3,n)=1 AND a(6,n)=1 AND a(9,n)=1 THEN LET win=n
+IF a(3,n)=1 AND a(5,n)=1 AND a(7,n)=1 THEN LET win=n
+IF a(1,n)=1 AND a(5,n)=1 AND a(9,n)=1 THEN LET win=n
+IF a(4,n)=1 AND a(5,n)=1 AND a(6,n)=1 THEN LET win=n
+IF a(7,n)=1 AND a(8,n)=1 AND a(9,n)=1 THEN LET win=n
+NEXT n
+RETURN
+
+LABEL DRAW_MOVE
+LET posx=80: LET posy=130: REM where to draw
+IF square=1 THEN LET posx=80: LET posy=130
+IF square=2 THEN LET posx=130: LET posy=130
+IF square=3 THEN LET posx=180: LET posy=130
+IF square=4 THEN LET posx=80: LET posy=100
+IF square=5 THEN LET posx=130: LET posy=100
+IF square=6 THEN LET posx=180: LET posy=100
+IF square=7 THEN LET posx=80: LET posy=70
+IF square=8 THEN LET posx=130: LET posy=70
+IF square=9 THEN LET posx=180: LET posy=70
+IF ply=1 THEN CIRCLE INK 4;posx-10,posy-10,10
+IF ply=2 THEN INK 5: PLOT posx,posy: DRAW -20,-20: PLOT posx-20,posy: DRAW 20,-20
+RETURN
