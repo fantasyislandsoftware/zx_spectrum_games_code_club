@@ -4,9 +4,6 @@
             "path": "."
         },
         {
-            "path": "../../../dreamfactory/backend/src/command"
-        },
-        {
             "path": "../../../dreamfactory/backend"
         }
     ],

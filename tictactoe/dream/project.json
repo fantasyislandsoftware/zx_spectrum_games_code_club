@@ -1,0 +1,9 @@
+{
+    "name": "Tic Tac Toe",
+    "source": {
+        "name": "tictactoe"
+    },
+    "build": {
+        "name": "tictactoe"
+    }
+}
