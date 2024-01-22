@@ -2,7 +2,7 @@
 lnbas src/{source_name}.bas src/~{source_name}.bas
 bas2tap -a src/~{source_name}.bas build/{build_name}.tap
 compileTap src/tape_blocks.json build/{build_name}.tap
-diag spectrum
+diag {target} src/tape_blocks.json
 
 [run]
-open -a fuse build/{build_name}.tap
+#open -a fuse build/{build_name}.tap

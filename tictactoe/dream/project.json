@@ -1,5 +1,6 @@
 {
     "name": "Tic Tac Toe",
+    "target": "spectrum",
     "source": {
         "name": "tictactoe"
     },
