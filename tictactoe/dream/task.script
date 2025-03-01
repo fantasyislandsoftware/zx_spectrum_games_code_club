@@ -5,4 +5,4 @@ compileTap src/tape_blocks.json build/{build_name}.tap
 diag {target} src/tape_blocks.json
 
 [run]
-#open -a fuse build/{build_name}.tap
+open -a fuse build/{build_name}.tap
